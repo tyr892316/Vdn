@@ -82,7 +82,7 @@ def run_flask_app():
         return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
     try:
-        public_url_obj = ngrok.connect(5002)
+        public_url_obj = ngrok.connect(5000)
         public_url = public_url_obj.public_url
         print(f"Public URL: {public_url}")
 
