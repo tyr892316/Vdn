@@ -34,19 +34,21 @@ def update_soul_txt(public_url):
     print(f"New ngrok link saved in soul.txt")
 
 def update_vps_soul_txt(public_url):
-    vps_ip = "178.128.111.249"
-    vps_user = "root"
-    vps_password = "venom"
+    vps_ip = "52.15.120.180"
+    vps_user = "ubuntu"
+    pem_file_path = os.path.join(os.path.dirname(__file__), "King-1.pem")
 
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(vps_ip, username=vps_user, password=vps_password)
+        ssh.connect(vps_ip, username=vps_user, key_filename=pem_file_path)
+
         sftp = ssh.open_sftp()
         with sftp.open("soul.txt", "w") as file:
             file.write(public_url)
         sftp.close()
         ssh.close()
+
         print("Updated soul.txt on VPS successfully.")
     except Exception as e:
         print(f"Failed to update soul.txt on VPS: {str(e)}")
@@ -54,7 +56,6 @@ def update_vps_soul_txt(public_url):
 def execute_command_async(command, duration):
     def run(command_id):
         try:
-           
             process = subprocess.Popen(command, shell=True)
             active_processes[command_id] = process.pid
             print(f"Command executed: {command} with PID: {process.pid}")
