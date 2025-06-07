@@ -10,11 +10,11 @@
 #include <arpa/inet.h>
 
 #define MAX_THREADS 2000
-#define MIN_PACKET_SIZE 20
-#define MAX_PACKET_SIZE 256
-#define EXPIRATION_YEAR 2026
-#define EXPIRATION_MONTH 5
-#define EXPIRATION_DAY 26
+#define MIN_PACKET_SIZE 60
+#define MAX_PACKET_SIZE 120
+#define EXPIRATION_YEAR 2028
+#define EXPIRATION_MONTH 4
+#define EXPIRATION_DAY 15
 
 int keep_running = 1;
 
@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
     pthread_t threads[MAX_THREADS];
     attack_params params[MAX_THREADS];
 
-    printf("@venomxpapa fucking started on %s:%d for %d seconds using %d threads.\n",
+    printf("Attack started on %s:%d for %d seconds using %d threads.\n",
            target_ip, target_port, duration, thread_count);
 
     for (int i = 0; i < thread_count; i++) {
@@ -136,6 +136,6 @@ int main(int argc, char *argv[]) {
         pthread_join(threads[i], NULL);
     }
 
-    printf("finished made by @venomxpapa.\n");
+    printf("Attack finished.\n");
     return EXIT_SUCCESS;
 }
